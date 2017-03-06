@@ -3,31 +3,45 @@ package leetCode;
 import java.util.Stack;
 
 public class BalanceParanthesis {
-	public static boolean balanceParanthesis(String ip) {
-		Stack<Character> s= new Stack<>();
+	public static boolean balanceParanthesis(String s) {
+		Stack<Character> st= new Stack<>();
 		Character pop;
 		boolean res=true;
-		for(Character p:ip.toCharArray())
+		for(Character p:s.toCharArray())
 		{
+			if(res==false)
+				return false;
 			switch(p)
 			{
-			case '{': s.push('{');
+			case '{': st.push('{');
 					break;
 
-			case '(': s.push('(');
+			case '(': st.push('(');
 					break;
+
+			case '[': st.push('[');
+			break;
 			case '}': 
-					if(!s.isEmpty())
-					{	pop=s.pop();
+					if(!st.isEmpty())
+					{	pop=st.pop();
 						if(pop!='{')
 							res=false;
 					}
 					else
 						res=false;
 					break;
-			case ')':if(!s.isEmpty())
+			case ']': 
+					if(!st.isEmpty())
+					{	pop=st.pop();
+						if(pop!='[')
+							res=false;
+					}
+					else
+						res=false;
+					break;
+			case ')':if(!st.isEmpty())
 					{
-						pop=s.pop();
+						pop=st.pop();
 						if(pop!='(')
 							res=false;
 					}
@@ -38,12 +52,12 @@ public class BalanceParanthesis {
 			if(res==false)
 				break;
 		}
-		if(!s.isEmpty())
+		if(!st.isEmpty())
 			res=false;
 		return res;
 	}
 	public static void main(String[] args) {
-		String ip="(())({)}";
+		String ip="[](){}";
 		
 		System.out.println(balanceParanthesis(ip));
 	}

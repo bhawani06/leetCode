@@ -6,7 +6,7 @@ public class MaxArea {
 	      int i =0,n=height.length-1;
 	      int max=0;
 	      while(i<n){
-	    	  max=Math.max(max, (n-i)*Math.min(height[i], height[n]));
+	    	  max=Integer.max(max, (n-i)*Integer.min(height[i], height[n]));
 	    	  if(height[i]< height[n])
 	    	  	  ++i;
 	    	  else
